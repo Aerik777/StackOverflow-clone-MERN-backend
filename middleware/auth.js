@@ -5,7 +5,7 @@ const authMiddleware = (req, res, next) => {
     return;
   }
 
-  let isLoggedIn = false; // Example condition, replace with actual logic
+  let isLoggedIn = true; // Example condition, replace with actual logic
   if (!isLoggedIn) {
     res.status(403).send("Unauthorized");
     return;

@@ -9,3 +9,9 @@ export const fetchQuestionsById = async (id) => {
     const question = await Question.findById(id);
     return question;
 };
+
+export const createQuestion = async (questionData) => {
+    console.log('Question Data: ', questionData);
+    const newQuestion = await Question.create(questionData);
+    return newQuestion;
+}; 

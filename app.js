@@ -3,8 +3,11 @@ import questionsRouter from './routes/questions/route.js';
 import answersRouter from './routes/answers/route.js';
 import authMiddleware from './middleware/auth.js';
 
+
 //express server
 const app = express();
+
+app.use(express.json());
 
 app.get('/', (req, res) => {
     res.send('Hello from app.js');
