@@ -1,18 +1,13 @@
 import { Router } from "express";
+import { createNewAnswer, getAllAnswer, getAnswerById } from "./controller.js";
 
 const router = Router();
 
-router.get('/', (req, res) => {
-    res.send('Get all answers');
-});
+router.get('/', getAllAnswer);
 
-router.get('/:id', (req, res) => {
-    res.send('Get answers by ID: ' + req.params.id);
-});
+router.get('/:id', getAnswerById);
 
-router.post('/', (req, res) => {
-    res.send('create new answers');
-});
+router.post('/',createNewAnswer);
 
 router.put('/:id', (req, res) => {
     res.send('update answers by ID:');
