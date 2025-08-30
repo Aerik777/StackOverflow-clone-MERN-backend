@@ -1,3 +1,5 @@
+import jwt from 'jsonwebtoken';
+
 const authMiddleware = (req, res, next) => {
   // Implement your authentication logic here
   if (req.method === "GET") {
@@ -5,11 +7,19 @@ const authMiddleware = (req, res, next) => {
     return;
   }
 
-  let isLoggedIn = true; // Example condition, replace with actual logic
-  if (!isLoggedIn) {
-    res.status(403).send("Unauthorized");
+
+  const { token } = req.cookies;
+  if(!token) {
+    res.status(401).send('Unauthorized');
     return;
   }
+  const validUser = jwt.verify(token, process.env.JWT_SECRET);
+  if(!validUser  || !validUser.type === 'user'){
+    res.status(403).send('Unauthorized');
+    return;
+  }
+
+  req.validUser = validUser;
   next();
 };
 
