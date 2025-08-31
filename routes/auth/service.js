@@ -20,5 +20,6 @@ export const validateUser = async (logindata) => {
     return user;
   } catch (error) {
     console.log('Error in validating user', error);
+
   }
 };

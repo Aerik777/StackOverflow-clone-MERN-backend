@@ -22,16 +22,20 @@ export const loginUser = async (req, res) => {
         type: 'user',
       },
       process.env.JWT_SECRET,
-      { expiresIn: '1h' }
+      { expiresIn: '1h' } // 1 hour
     );
 
-    // Return JSON instead of plain text
+    // ✅ Set cookie for localhost React frontend
     return res
-      .cookie('token', token, { maxAge: 3600000, httpOnly: true }) // 1 hour
+      .cookie('token', token, {
+        maxAge: 3600000,       // 1 hour
+        httpOnly: true,        // prevents JS access
+        secure: false,         // must be false for localhost
+        sameSite: 'lax',       // allows cross-port requests from React
+      })
       .status(200)
       .json({ success: true, message: 'Login success' });
   }
 
-  // Return JSON for failed login
   return res.status(401).json({ success: false, message: 'Invalid email or password' });
 };

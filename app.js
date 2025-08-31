@@ -17,13 +17,14 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 
-app.get('/', (req, res) => {
-    res.send('Hello from app.js');
-});
 
 
 app.use('/auth', authRouter);
 app.use(authMiddleware);
+app.post('/session', (req, res) => {
+    res.json({Success: true});
+});
+
 app.use('/questions', questionsRouter);
 app.use('/answers', answersRouter);
 
